@@ -51,7 +51,7 @@ section[id] { scroll-margin-top: 28px; }
 .brand > span { display: grid; gap: 2px; line-height: 1; }
 .brand strong { font-size: 26px; font-weight: 850; letter-spacing: -.075em; }
 .brand span span { font-size: 11px; font-weight: 680; letter-spacing: .025em; }
-.header nav { display: flex; gap: 34px; font-size: .92rem; font-weight: 700; }
+.header nav { display: flex; gap: clamp(12px, 2.4vw, 34px); font-size: .92rem; font-weight: 700; }
 .header nav a:hover, .text-link:hover { color: var(--red); }
 .header > .button { justify-self: end; }
 
@@ -144,7 +144,7 @@ section[id] { scroll-margin-top: 28px; }
   font-weight: 620;
 }
 
-.services { padding-block: clamp(42px, 5.6vw, 76px) clamp(48px, 6vw, 86px); }
+.services { padding-block: clamp(42px, 5.6vw, 76px) clamp(37px, 4.5vw, 64px); }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 12px 20px; margin-bottom: 25px; }
 .section-heading h2, .contact h2 { font-size: clamp(2.35rem, 4.65vw, 4.35rem); font-weight: 850; letter-spacing: -.073em; line-height: .99; }
 .section-heading p { margin-top: 9px; color: var(--quiet); line-height: 1.4; }
@@ -176,6 +176,65 @@ section[id] { scroll-margin-top: 28px; }
   transition: color .18s, background-color .18s;
 }
 .service:hover .service-arrow { color: white; background: var(--red); }
+
+.portfolio {
+  padding-block: clamp(24px, 3vw, 44px) clamp(42px, 5.4vw, 76px);
+  border-top: 1px solid var(--line);
+}
+.portfolio-heading { align-items: center; }
+.portfolio-controls { display: flex; flex: none; gap: 8px; }
+.portfolio-controls[hidden] { display: none; }
+.portfolio-button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fcfbf8;
+  color: var(--ink);
+  font: inherit;
+  font-size: .83rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.portfolio-button:hover { border-color: var(--red); color: var(--deep-red); }
+.portfolio-button:focus-visible, .portfolio-track:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.portfolio-arrow { font-size: 1.13rem; }
+.portfolio-track {
+  --project-gap: 15px;
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 2 * var(--project-gap)) / 3);
+  gap: var(--project-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #ae626a #e9e2e0;
+  padding-bottom: 10px;
+}
+.project {
+  min-width: 0;
+  border-radius: 15px;
+  border: 1px solid var(--line);
+  background: #fcfbf8;
+  scroll-snap-align: start;
+}
+.project-photo {
+  display: block;
+  aspect-ratio: 1.24;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background: var(--dark);
+}
+.project-photo:focus-visible { outline: 3px solid var(--red-on-dark); outline-offset: -5px; }
+.project-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 29%; }
+.project-photo-full img { object-fit: contain; object-position: center; }
+.project-caption { padding: 14px 16px 16px; }
+.project-caption h3 { font-size: clamp(1.18rem, 2vw, 1.5rem); font-weight: 800; letter-spacing: -.045em; }
+.project-caption p { margin-top: 4px; color: var(--quiet); font-size: .88rem; line-height: 1.4; }
+.portfolio-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 .contact {
   display: grid;
@@ -209,6 +268,7 @@ section[id] { scroll-margin-top: 28px; }
   .hero { min-height: 395px; }
   .hero h1 { font-size: clamp(2.15rem, 5.55vw, 4.1rem); }
   .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portfolio-track { grid-auto-columns: calc((100% - var(--project-gap)) / 2); }
 }
 
 @media (max-width: 630px) {
@@ -233,6 +293,8 @@ section[id] { scroll-margin-top: 28px; }
   .service-content { padding: 11px; gap: 6px; }
   .service p { font-size: .79rem; }
   .service-arrow { width: 26px; height: 26px; font-size: .9rem; }
+  .portfolio-heading { gap: 13px; }
+  .portfolio-track { --project-gap: 10px; grid-auto-columns: 86%; }
   .contact { grid-template-columns: 1fr; gap: 26px; border-radius: 17px; }
   .contact h2 br { display: none; }
   .footer { min-height: 87px; }
